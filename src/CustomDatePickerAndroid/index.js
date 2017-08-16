@@ -44,6 +44,10 @@ export default class CustomDatePickerAndroid extends Component {
         maxDate: this.props.maximumDate,
         mode: this.props.datePickerModeAndroid,
       });
+      debugger
+      if(action == DatePickerAndroid.dateSetAction) {
+        console.log(year + ' ' + month + ' ' + day);
+      }
       if (action !== DatePickerAndroid.dismissedAction) {
         const date = moment({ year, month, day }).toDate();
 
@@ -51,8 +55,8 @@ export default class CustomDatePickerAndroid extends Component {
           // Prepopulate and show time picker
           const timeOptions = {is24Hour: this.props.is24Hour};
           if (this.props.date) {
-            timeOptions.hour = moment(this.props.date).hour();
-            timeOptions.minute = moment(this.props.date).minute();
+            timeOptions.hours = this.props.date.getHours();
+            timeOptions.minute = this.props.date.getMinutes();
           }
           const { action: timeAction, hour, minute } = await TimePickerAndroid.open(timeOptions);
           if (timeAction !== TimePickerAndroid.dismissedAction) {
