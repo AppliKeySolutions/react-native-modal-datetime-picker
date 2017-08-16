@@ -61,9 +61,11 @@ export default class CustomDatePickerIOS extends Component {
     if (this.confirmed) {
       this.props.onHideAfterConfirm(this.state.date);
     }
+    this.props.onModalHide();
   };
 
   _handleDateChange = date => {
+    this.props.onChooseDate(date);
     this.setState({
       date,
       userIsInteractingWithPicker: false,
